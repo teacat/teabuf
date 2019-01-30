@@ -1,0 +1,27 @@
+{
+    "name": "vscode-teabuf3",
+    "displayName": "TeaBuf3 Syntax Highlight",
+    "description": "TeaBuf3 syntax highlight for VS Code.",
+    "publisher": "YamiOdymel",
+    "version": "0.0.1",
+    "repository": "https://github.com/teacat/teabuf3",
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "teabuf3",
+            "aliases": ["TeaBuf 3", "teabuf3"],
+            "extensions": [".teabuf3"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "teabuf3",
+            "scopeName": "source.teabuf3",
+            "path": "./syntaxes/teabuf3.tmLanguage.json"
+        }]
+    }
+}

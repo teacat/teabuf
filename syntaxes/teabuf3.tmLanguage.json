@@ -1,0 +1,233 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "teabuf3",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#custom_types"
+		},
+		{
+			"include": "#storage_types"
+		},
+		{
+			"begin": "\\b(import)\\s+",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.import.teabuf3"
+				}
+			},
+			"end": "(?!\\G)",
+			"patterns": [
+				{
+					"include": "#imports"
+				}
+			]
+		},
+		{
+			"begin": "\\b(package)\\s+",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.package.teabuf3"
+				}
+			},
+			"end": "(?!\\G)",
+			"patterns": [
+				{
+					"match": "\\d\\w*",
+					"name": "invalid.illegal.identifier.teabuf3"
+				},
+				{
+					"match": "\\w+",
+					"name": "entity.name.package.teabuf3"
+				}
+			]
+		},
+		{
+			"begin": "\\b(message|enum|service)\\s+",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.type.teabuf3"
+				}
+			},
+			"end": "(?!\\G)",
+			"patterns": [
+				{
+					"match": "\\d\\w*",
+					"name": "invalid.illegal.identifier.teabuf3"
+				},
+				{
+					"match": "\\w+",
+					"name": "entity.name.type.teabuf3"
+				}
+			]
+		},
+		{
+			"begin": "\\b(type)\\s+",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.type.teabuf3"
+				}
+			},
+			"end": "(?!\\G)",
+			"patterns": [
+				{
+					"match": "\\d\\w*",
+					"name": "invalid.illegal.identifier.teabuf3"
+				},
+				{
+					"match": "\\w+",
+					"name": "entity.name.type.teabuf3"
+				}
+			]
+		},
+		{
+			"comment": "Functions",
+			"match": "(\\bfunc\\b)|(\\w+)(?=\\()",
+			"captures": {
+				"1": {
+					"name": "keyword.function.teabuf3"
+				},
+				"2": {
+					"patterns": [
+						{
+							"match": "\\d\\w*",
+							"name": "invalid.illegal.identifier.teabuf3"
+						},
+						{
+							"match": "\\w+",
+							"name": "support.function.teabuf3"
+						}
+					]
+				}
+			}
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.teabuf3",
+				"match": "\\b(if|while|for|return)\\b"
+			}]
+		},
+		"custom_types": {
+			"patterns": [{
+				"match": "^\\s+\\w*?(?: | \\[\\])([A-Z]\\w*?)$",
+				"captures": {
+					"1": {
+						"name": "entity.name.type.teabuf3"
+					}
+				}
+			}]
+		},
+		"imports": {
+			"patterns": [
+				{
+					"match": "((?!\\s+\")[^\\s]*)?\\s*((\")([^\"]*)(\"))",
+					"captures": {
+						"1": {
+							"name": "entity.alias.import.teabuf3"
+						},
+						"2": {
+							"name": "string.quoted.double.teabuf3"
+						},
+						"3": {
+							"name": "punctuation.definition.string.begin.teabuf3"
+						},
+						"4": {
+							"name": "entity.name.import.teabuf3"
+						},
+						"5": {
+							"name": "punctuation.definition.string.end.teabuf3"
+						}
+					}
+				},
+				{
+					"begin": "\\(",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.imports.begin.bracket.round.teabuf3"
+						}
+					},
+					"end": "\\)",
+					"endCaptures": {
+						"0": {
+							"name": "punctuation.definition.imports.end.bracket.round.teabuf3"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#comments"
+						},
+						{
+							"include": "#imports"
+						}
+					]
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"begin": "/\\*",
+					"end": "\\*/",
+					"captures": {
+						"0": {
+							"name": "punctuation.definition.comment.teabuf3"
+						}
+					},
+					"name": "comment.block.teabuf"
+				},
+				{
+					"begin": "//",
+					"beginCaptures": {
+						"0": {
+							"name": "punctuation.definition.comment.teabuf3"
+						}
+					},
+					"end": "$",
+					"name": "comment.line.double-slash.teabuf3"
+				}
+			]
+		},
+		"storage_types": {
+			"patterns": [
+				{
+					"match": "\\bbool\\b",
+					"name": "storage.type.boolean.teabuf3"
+				},
+				{
+					"match": "\\bbyte\\b",
+					"name": "storage.type.byte.teabuf3"
+				},
+				{
+					"match": "\\b(complex(64|128)|float(32|64)|u?int(8|16|32|64)?)\\b",
+					"name": "storage.type.numeric.teabuf3"
+				},
+				{
+					"match": "\\bstring\\b",
+					"name": "storage.type.string.teabuf3"
+				}
+			]
+		},
+		"strings": {
+			"name": "string.quoted.double.teabuf3",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.teabuf3",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.teabuf3"
+}
