@@ -6,6 +6,14 @@
 
 茶葉緩衝 3 支援 VS Code 的程式碼螢光標記（Syntax Highlight），可以至 [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=YamiOdymel.vscode-teabuf3) 下載。
 
+##
+
+```bash
+$ go install github.com/teacat/teabuf3
+$ teabuf foobar
+$ cat foobar.proto
+```
+
 ## 功能改進
 
 * [省去分號](#省去分號)
@@ -117,6 +125,19 @@ message User {
     count uint
 }
 ```
+
+| 標準型態 | 32 位元  | 64 位元與預設型態 |
+|----------|----------|-------------------|
+| double   |          |                   |
+| float    |          |                   |
+| int      | int32    | int64             |
+| uint     | uint32   | uint64            |
+| sint     | sint32   | sint64            |
+| fixed    | fixed32  | fixed64           |
+| sfixed   | sfixed32 | sfixed64          |
+| bool     |          |                   |
+| string   |          |                   |
+| bytes    |          |                   |
 
 ### 型態別名
 

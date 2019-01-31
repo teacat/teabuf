@@ -1,9 +1,9 @@
 {
     "name": "vscode-teabuf3",
-    "displayName": "TeaBuf3 Syntax Highlight",
-    "description": "TeaBuf3 syntax highlight for VS Code.",
+    "displayName": "TeaBuf 3 Syntax Highlight",
+    "description": "TeaBuf 3 syntax highlight for VS Code.",
     "publisher": "YamiOdymel",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "repository": "https://github.com/teacat/teabuf3",
     "engines": {
         "vscode": "^1.30.0"

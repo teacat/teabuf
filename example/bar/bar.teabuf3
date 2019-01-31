@@ -1,0 +1,13 @@
+package pb
+import ../foo
+
+// User 呈現了一個使用者資訊。
+message User {
+    username string
+    password string
+    level    Level
+}
+
+service UserService {
+    CreateUser(CreateUserRequest) CreateUserResponse
+}
