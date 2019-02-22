@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/urfave/cli"
 	"io/ioutil"
@@ -34,15 +35,14 @@ func start(in, out string) {
 		if err != nil {
 			log.Fatal(err)
 		}
-
 		for _, f := range files {
-			if filepath.Ext(f.Name()) == "teabuf3" {
-
+			if filepath.Ext(f.Name()) == ".teabuf3" {
+				parse(in + "/" + f.Name())
 			}
-
-			fmt.Println(f.Name())
 		}
+		return
 	}
+	parse(in)
 }
 
 type typeAlias struct {
@@ -52,19 +52,33 @@ type typeAlias struct {
 
 //
 func parse(path string) {
-	b, err := ioutil.ReadFile(path)
+	//b, err := ioutil.ReadFile(path)
+	//if err != nil {
+	//	panic(err)
+	//}
+	//s := string(b)
+
+	file, err := os.Open(path)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	s := string(b)
+	defer file.Close()
 
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
 }
 
-var (
-	typeRegExp = `type\s*?([A-Z]\w*?)\s*?(string|bool|float|double|bytes|(?:s|u|)int(?:32|64|)|(?:s|)fixed(?:32|64|))`
-)
+//var (
+//	typeRegExp = `type\s*?([A-Z]\w*?)\s*?(string|bool|float|double|bytes|(?:s|u|)int(?:32|64|)|(?:s|)fixed(?:32|64|))`
+//)
 
-func parseTypeAliases(content string) []*typeAlias {
-	pat := regexp.MustCompile(`(\w+)=(\w+)`)
-	matches := pat.FindAllStringSubmatch(data, -1)
-}
+//func parseTypeAliases(content string) []*typeAlias {
+//	pat := regexp.MustCompile(`(\w+)=(\w+)`)
+//	matches := pat.FindAllStringSubmatch(data, -1)
+//}
